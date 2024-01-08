@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 
+import Exceptions.EmptyNameException;
 import Exceptions.FutureDateException;
 import Exceptions.InvalidHiredDateException;
 
@@ -10,7 +11,10 @@ public class Dipendente {
 	//il costruttore può generare un'eccezione ("throws") di tipo Exception
 	public Dipendente(String nome, String cognome, LocalDate dataNascita, LocalDate dataAssunzione) throws Exception {
 		super();
-		this.nome = nome;
+		if (nome.isEmpty())
+			throw new EmptyNameException();
+		else
+			this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 		if (this.dataNascita.compareTo(LocalDate.now())>0 || this.dataAssunzione.compareTo(LocalDate.now())>0) 
